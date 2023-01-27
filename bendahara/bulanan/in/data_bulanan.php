@@ -4,7 +4,9 @@
 		<i class="icon fas fa-info"></i> Persembahan Syukur Bulanan</h5>
 	<?php
     $sql = $koneksi->query("SELECT SUM(masuk) as tot_masuk  from bulanan where jenis='Masuk'");
-  while ($row = mysqli_fetch_assoc($sql)) {
+
+
+  while ($row = fetch_assoc($sql)) {
   ?>
 	<h2>
 		<?php echo rupiah($data['tot_masuk']); }?>
@@ -41,7 +43,7 @@
 					<?php
               $no = 1;
               $sql = $koneksi->query("select * from bulanan where jenis='masuk' order by tgl_pb desc");
-              while ($row = mysqli_fetch_assoc($sql)) {
+              while ($row = fetch_assoc($sql)) {
             ?>
 
 					<tr>

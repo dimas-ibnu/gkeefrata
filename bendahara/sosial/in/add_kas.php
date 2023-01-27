@@ -39,20 +39,26 @@
 
     if (isset ($_POST['Simpan'])){
 
-    //menangkap post masuk
+
+    // menangkap post masuk
     $masuk=$_POST['masuk'];
 
     //membuang Rp dan Titik
     $masuk_hasil=preg_replace("/[^0-9]/", "", $masuk);
+    $current_result=(int) $masuk_hasil;
+
+    var_dump($current_result);
+
 
     //mulai proses simpan data
         $sql_simpan = "INSERT INTO dana_sosial(tgl_ds,uraian_ds,masuk,keluar,jenis) VALUES (
         '".$_POST['tgl_ds']."',
         '".$_POST['uraian_ds']."',
-        '".$masuk_hasil."',
-        '0',
+        ".$current_result.",
+        0,
         'Masuk')";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
+
         mysqli_close($koneksi);
 
     if ($query_simpan) {
@@ -69,7 +75,8 @@
           window.location = 'index.php?page=i_add_ks';
           }
       })</script>";
-    }}
+    }
+}
      //selesai proses simpan data
 
      ?>

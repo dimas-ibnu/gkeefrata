@@ -1,11 +1,11 @@
 <?php
   $sql = $koneksi->query("SELECT SUM(masuk) as tot_masuk  from bulanan where jenis='Masuk'");
- while ($row = mysqli_fetch_assoc($sql)) {
+ while ($row = ($sql)) {
     $masuk=$data['tot_masuk'];
   }
 ?>
 
-while ($row = mysqli_fetch_assoc($sql)) {
+while ($row = fetch_assoc($sql)) {
 
 <div class="alert alert-info alert-dismissible">
 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

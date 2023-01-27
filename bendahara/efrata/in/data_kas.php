@@ -4,7 +4,7 @@
 		<i class="icon fas fa-info"></i> Total Pemasukan Gereja Efrata</h5>
 	<?php
     $sql = $koneksi->query("SELECT SUM(masuk) as tot_masuk  from dana_kas where jenis='Masuk'");
-    while ($data= $sql->mysqli_fetch_assoc()) {
+    while ($data= $sql->fetch_assoc()) {
   ?>
 	<h2>
 		<?php echo rupiah($data['tot_masuk']); }?>
@@ -41,7 +41,7 @@
 					<?php
               $no = 1;
               $sql = $koneksi->query("select * from dana_kas where jenis='Masuk' order by tgl_kas desc");
-              while ($data= $sql->mysqli_fetch_assoc()) {
+              while ($data= $sql->fetch_assoc()) {
             ?>
 
 					<tr>

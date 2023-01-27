@@ -47,13 +47,16 @@
 <?php
 
     if (isset ($_POST['Simpan'])){
+
     //mulai proses simpan data
-        $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna,username,password,level, kode) VALUES (
+        $sql_simpan = "INSERT INTO `tb_pengguna`( `nama_pengguna`, `username`, `password`, `level`) VALUES (
         '".$_POST['nama_pengguna']."',
         '".$_POST['username']."',
         '".$_POST['password']."',
-        '".$_POST['level']."')";
+        '".$_POST['level']."'
+        )";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
+
         mysqli_close($koneksi);
 
     if ($query_simpan) {
@@ -70,6 +73,7 @@
           window.location = 'index.php?page=MyApp/add_pengguna';
           }
       })</script>";
-    }}
+    }
+  }
      //selesai proses simpan data
 ?>

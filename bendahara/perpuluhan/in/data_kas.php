@@ -4,6 +4,7 @@
 		<i class="icon fas fa-info"></i> Total Pemasukan Gereja Efrata</h5>
 	<?php
     $sql = $koneksi->query("SELECT SUM(masuk) as tot_masuk  from perpuluhan where jenis='Masuk'");
+
     while ($data= $sql->fetch_assoc()) {
   ?>
 	<h2>
