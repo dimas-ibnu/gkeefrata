@@ -55,12 +55,12 @@
       </div>
       </div>
 
-<div class="form-group row">
+<!-- <div class="form-group row">
         <label class="col-sm-2 col-form-label">Kode Admin</label>
         <div class="col-sm-6">
           <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
-      </div> 
+      </div>  -->
 
 
     </div>
@@ -81,10 +81,13 @@
         username='".$_POST['username']."',
         password='".$_POST['password']."',
         level='".$_POST['level']."'
-        kode ='".$_POST['kode']."'
         WHERE id_pengguna='".$_POST['id_pengguna']."'";
     $query_ubah = mysqli_query($koneksi, $sql_ubah);
     mysqli_close($koneksi);
+
+    /// Delete column kode
+        // kode ='".$_POST['kode']."'
+
 
     if ($query_ubah) {
         echo "<script>
