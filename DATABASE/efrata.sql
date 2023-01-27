@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2023 pada 16.30
--- Versi server: 10.4.8-MariaDB
--- Versi PHP: 7.3.11
+-- Host: 127.0.0.1:3308
+-- Generation Time: Jan 27, 2023 at 12:03 PM
+-- Server version: 5.7.36
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,35 +24,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bulanan`
+-- Table structure for table `bulanan`
 --
 
-CREATE TABLE `bulanan` (
+DROP TABLE IF EXISTS `bulanan`;
+CREATE TABLE IF NOT EXISTS `bulanan` (
   `id_pb` int(11) NOT NULL,
   `tgl_pb` date NOT NULL,
   `uraian_pb` varchar(200) NOT NULL,
   `masuk` int(11) NOT NULL,
-  `waktu_pb` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `waktu_pb` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dana_kas`
+-- Table structure for table `dana_kas`
 --
 
-CREATE TABLE `dana_kas` (
+DROP TABLE IF EXISTS `dana_kas`;
+CREATE TABLE IF NOT EXISTS `dana_kas` (
   `id_kas` int(11) NOT NULL,
   `tgl_kas` date NOT NULL,
   `uraian_kas` varchar(200) NOT NULL,
   `masuk` int(11) NOT NULL,
   `keluar` int(11) NOT NULL,
   `jenis` enum('Masuk','Keluar') NOT NULL,
-  `waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_kas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `dana_kas`
+-- Dumping data for table `dana_kas`
 --
 
 INSERT INTO `dana_kas` (`id_kas`, `tgl_kas`, `uraian_kas`, `masuk`, `keluar`, `jenis`, `waktu`) VALUES
@@ -63,79 +65,70 @@ INSERT INTO `dana_kas` (`id_kas`, `tgl_kas`, `uraian_kas`, `masuk`, `keluar`, `j
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dana_sosial`
+-- Table structure for table `dana_sosial`
 --
 
-CREATE TABLE `dana_sosial` (
-  `id_ds` int(11) NOT NULL,
+DROP TABLE IF EXISTS `dana_sosial`;
+CREATE TABLE IF NOT EXISTS `dana_sosial` (
+  `id_ds` int(11) NOT NULL AUTO_INCREMENT,
   `tgl_ds` date NOT NULL,
   `uraian_ds` varchar(200) NOT NULL,
   `masuk` int(11) NOT NULL,
   `keluar` int(11) NOT NULL,
   `jenis` enum('Masuk','Keluar') NOT NULL,
-  `waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_ds`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `dana_sosial`
+-- Dumping data for table `dana_sosial`
 --
 
 INSERT INTO `dana_sosial` (`id_ds`, `tgl_ds`, `uraian_ds`, `masuk`, `keluar`, `jenis`, `waktu`) VALUES
-(0, '2023-01-16', 'Dana Penopang ', 200000, 0, 'Masuk', '2023-01-17 14:44:07'),
-(1, '2023-01-13', 'Kapakat I', 1000000, 0, 'Masuk', '2023-01-17 14:44:07');
+(1, '1999-10-01', 'oakwd', 1000, 0, 'Masuk', '2023-01-27 11:32:34'),
+(2, '1999-10-01', 'oakwd', 1000, 0, 'Masuk', '2023-01-27 11:32:53'),
+(3, '1999-12-19', 'oke mantap', 101283, 0, 'Masuk', '2023-01-27 11:36:59');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `perpuluhan`
+-- Table structure for table `perpuluhan`
 --
 
-CREATE TABLE `perpuluhan` (
+DROP TABLE IF EXISTS `perpuluhan`;
+CREATE TABLE IF NOT EXISTS `perpuluhan` (
   `id_pul` int(11) NOT NULL,
   `tgl_pul` date NOT NULL,
   `uraian_pul` varchar(200) NOT NULL,
   `masuk` int(11) NOT NULL,
-  `waktu_pul` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `waktu_pul` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pengguna`
+-- Table structure for table `tb_pengguna`
 --
 
-CREATE TABLE `tb_pengguna` (
-  `id_pengguna` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tb_pengguna`;
+CREATE TABLE IF NOT EXISTS `tb_pengguna` (
+  `id_pengguna` int(11) NOT NULL AUTO_INCREMENT,
   `nama_pengguna` varchar(30) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `username` varchar(1028) NOT NULL,
+  `password` longtext NOT NULL,
   `level` enum('Administrator','Bendahara') NOT NULL,
-  `kode` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `kode` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_pengguna`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tb_pengguna`
+-- Dumping data for table `tb_pengguna`
 --
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password`, `level`, `kode`) VALUES
 (1, 'Antoni Sephtianus', 'bendahara', 'bendahara', 'Bendahara', 0),
-(2, 'Meisa', 'admin', 'admin', 'Administrator', 0);
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `dana_kas`
---
-ALTER TABLE `dana_kas`
-  ADD PRIMARY KEY (`id_kas`);
-
---
--- Indeks untuk tabel `dana_sosial`
---
-ALTER TABLE `dana_sosial`
-  ADD PRIMARY KEY (`id_ds`);
+(2, 'Meisa', 'admin', 'admin', 'Administrator', 0),
+(3, 'dimas', 'dimasibnumalik@gmail.com', 'qwe12345', 'Administrator', 10);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
